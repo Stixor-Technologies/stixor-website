@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { createRoot } from "react-dom/client";
-import React, { useRef, useState } from "react";
-import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
+import React, { useRef, useState, Suspense, useEffect } from "react";
+import { Canvas, useFrame, ThreeElements, useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "@react-three/drei";
+import { Model } from "../components/office/Office";
+import { TableModel } from "../components/office/Table";
 
 function Box(props: ThreeElements["mesh"]) {
   const mesh = useRef<THREE.Mesh>(null!);
@@ -22,6 +26,26 @@ function Box(props: ThreeElements["mesh"]) {
     </mesh>
   );
 }
+
+function Office() {
+  const glb = useLoader(GLTFLoader, "/assets/office.glb");
+  console.log(glb?.animations);
+  let mixer = new THREE.AnimationMixer(glb.scene);
+
+  useEffect(() => {
+    const action = mixer.clipAction(glb.animations[8]);
+    action.play();
+  });
+
+  useFrame(() => {});
+
+  return (
+    <Suspense fallback={null}>
+      <primitive object={glb.scene} />
+    </Suspense>
+  );
+}
+
 export default function App() {
   return (
     <div
@@ -37,14 +61,14 @@ export default function App() {
           zoom: 1,
         }}
       >
+        <Suspense fallback={null}>
+          <Office />
+          {/* <TableModel /> */}
+        </Suspense>
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        {/* <Stats />
-        <OrbitControls /> */}
-
-        <Box position={[-1.2, 0, 0]} />
-        <Box position={[1.2, 0, 0]} />
+        <OrbitControls />
       </Canvas>
     </div>
   );
