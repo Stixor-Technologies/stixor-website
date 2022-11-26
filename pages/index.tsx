@@ -3,9 +3,18 @@ import { createRoot } from "react-dom/client";
 import React, { useRef, useState, Suspense, useEffect } from "react";
 import { Canvas, useFrame, ThreeElements, useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { OrbitControls } from "@react-three/drei";
-import { Model } from "../components/office/Office";
+import {
+  GizmoHelper,
+  GizmoViewcube,
+  GizmoViewport,
+  OrbitControls,
+  SpotLight,
+  TransformControls,
+  useHelper,
+} from "@react-three/drei";
+import { Model } from "../components/office/Final_animation";
 import { TableModel } from "../components/office/Table";
+import { BoxHelper, PointLightHelper, SpotLightHelper } from "three";
 
 function Box(props: ThreeElements["mesh"]) {
   const mesh = useRef<THREE.Mesh>(null!);
@@ -28,16 +37,29 @@ function Box(props: ThreeElements["mesh"]) {
 }
 
 function Office() {
-  const glb = useLoader(GLTFLoader, "/assets/office.glb");
-  console.log(glb?.animations);
-  let mixer = new THREE.AnimationMixer(glb.scene);
+  const glb = useLoader(GLTFLoader, "/assets/final_animation.glb");
 
-  useEffect(() => {
-    const action = mixer.clipAction(glb.animations[8]);
-    action.play();
+  glb.scene.traverse(function (object) {
+    object.frustumCulled = false;
   });
 
-  useFrame(() => {});
+  let mixer: THREE.AnimationMixer;
+  if (glb.animations.length) {
+    mixer = new THREE.AnimationMixer(glb.scene);
+    glb.animations.forEach((clip) => {
+      const action = mixer.clipAction(clip);
+      action.play();
+    });
+  }
+
+  useFrame((state, delta) => {
+    mixer?.update(delta);
+  });
+
+  useEffect(() => {
+    const action = mixer.clipAction(glb.animations[1]);
+    action.play();
+  });
 
   return (
     <Suspense fallback={null}>
@@ -45,6 +67,22 @@ function Office() {
     </Suspense>
   );
 }
+
+const Lighting = () => {
+  const light = useRef(null);
+  useHelper(light, PointLightHelper, 1, "red");
+
+  return (
+    <TransformControls
+      position={[-14.5, 7.6, 1.2]}
+      onObjectChange={(e) => {
+        console.log(e?.target.worldPosition);
+      }}
+    >
+      <pointLight ref={light} />
+    </TransformControls>
+  );
+};
 
 export default function App() {
   return (
@@ -62,13 +100,19 @@ export default function App() {
         }}
       >
         <Suspense fallback={null}>
-          <Office />
+          <Model />
+          {/* <Office /> */}
           {/* <TableModel /> */}
         </Suspense>
+        <GizmoHelper
+          alignment="bottom-right" // widget alignment within scene
+          margin={[80, 80]} // widget margins (X, Y)
+        >
+          <GizmoViewport />
+        </GizmoHelper>
+        <OrbitControls makeDefault />
+        <Lighting />
         <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-        <pointLight position={[-10, -10, -10]} />
-        <OrbitControls />
       </Canvas>
     </div>
   );
