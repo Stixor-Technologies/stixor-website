@@ -17,11 +17,19 @@ import {
 } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTFLoader, GLTFParser } from "three/examples/jsm/loaders/GLTFLoader";
-import { AnimationClip, Object3D, PointLight, PointLightHelper } from "three";
+import {
+  AnimationClip,
+  Object3D,
+  PlaneGeometry,
+  PointLight,
+  PointLightHelper,
+} from "three";
 
 const deg2rad = (degrees: any) => degrees * (Math.PI / 180);
 
-const TV = () => {
+const ScreenContent = () => {
+  const transform = useRef(null);
+
   const [video] = useState(() => {
     const vid = document.createElement("video");
     vid.src = "/videoPortfolio.mp4";
@@ -33,15 +41,29 @@ const TV = () => {
   });
 
   return (
-    <group rotation={[Math.PI / 8, Math.PI * 1.2, 0]}>
-      <mesh rotation={[0, 0, 0]} position={[0, 0, 1.1]}>
-        <planeGeometry args={[3.2, 1.9]} />
-        <meshStandardMaterial emissive={"white"} side={THREE.DoubleSide}>
-          <videoTexture attach="map" args={[video]} />
-          <videoTexture attach="emissiveMap" args={[video]} />
-        </meshStandardMaterial>
-      </mesh>
-    </group>
+    <>
+      {/* <TransformControls
+        mode="rotate"
+        object={transform}
+        onObjectChange={(e) => {
+          console.log(e?.target);
+        }}
+      /> */}
+      <group
+        ref={transform}
+        position={[-14.02, 2.56, 1.53]}
+        rotation={[-2.726, -1.177, -2.7424]}
+        scale={[0.55, 0.5, 1]}
+      >
+        <mesh>
+          <planeGeometry args={[3.2, 1.9]} />
+          <meshStandardMaterial emissive={"white"} side={THREE.DoubleSide}>
+            <videoTexture attach="map" args={[video]} />
+            <videoTexture attach="emissiveMap" args={[video]} />
+          </meshStandardMaterial>
+        </mesh>
+      </group>
+    </>
   );
 };
 
@@ -55,18 +77,14 @@ const Camera = () => {
   });
 
   useThree(({ camera }) => {
-    camera.rotation.set(
-      -0.3441908820057993,
-      -0.6327997125518625,
-      -0.20890163368277725
-    );
-    camera.position.set(-25, 7, 9);
+    camera.rotation.set(-0.359, -0.571, -0.2);
+    camera.position.set(-23.625, 7.45, 9.85);
     // camera.zoom = width <= 1200 ? 1.2 : width <= 768 ? 1 : 1.75;
   });
-  // useFrame(({ camera }) => {
-  //   console.log("camera", camera.position);
-  //   console.log("rot", camera.rotation);
-  // });
+  useFrame(({ camera }) => {
+    console.log("camera", camera.position);
+    console.log("rot", camera.rotation);
+  });
   return null;
 };
 
@@ -76,13 +94,13 @@ const Lights = () => {
 
   return (
     <>
-      <TransformControls
+      {/* <TransformControls
         object={light}
         mode="translate"
         onObjectChange={(e) => {
           console.log(e?.target.worldPosition);
         }}
-      />
+      /> */}
       <ambientLight intensity={10} color={0x404040} />
       <pointLight ref={light} position={[-12.5, 5, 2.7]} />
     </>
@@ -125,11 +143,13 @@ function Header() {
             camera={{
               near: 0.1,
               far: 10000,
+              zoom: 1.7,
             }}
             // style={{ pointerEvents: "none" }}
           >
             <OrbitControls target={[-10, 0, -10]} makeDefault />
             <Camera />
+            <ScreenContent />
             <Suspense fallback={null}>
               <Model />
               {/* <TV /> */}
