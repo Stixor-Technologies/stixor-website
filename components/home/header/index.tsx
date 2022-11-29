@@ -14,6 +14,7 @@ import {
   PresentationControls,
   TransformControls,
   useHelper,
+  useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
 import { GLTFLoader, GLTFParser } from "three/examples/jsm/loaders/GLTFLoader";
@@ -27,7 +28,7 @@ import {
 
 const deg2rad = (degrees: any) => degrees * (Math.PI / 180);
 
-const ScreenContent = () => {
+const ScreenContent = (props: any) => {
   const transform = useRef(null);
 
   const [video] = useState(() => {
@@ -46,14 +47,14 @@ const ScreenContent = () => {
         mode="rotate"
         object={transform}
         onObjectChange={(e) => {
-          console.log(e?.target);
+          console.log(e?.target.object);
         }}
       /> */}
       <group
         ref={transform}
-        position={[-14.02, 2.56, 1.53]}
-        rotation={[-2.726, -1.177, -2.7424]}
-        scale={[0.55, 0.5, 1]}
+        position={props.position}
+        rotation={props.rotation}
+        scale={props.scale}
       >
         <mesh>
           <planeGeometry args={[3.2, 1.9]} />
@@ -61,6 +62,34 @@ const ScreenContent = () => {
             <videoTexture attach="map" args={[video]} />
             <videoTexture attach="emissiveMap" args={[video]} />
           </meshStandardMaterial>
+        </mesh>
+      </group>
+    </>
+  );
+};
+const CarpetTexture = (props: any) => {
+  const _carpetTexture = useRef(null);
+
+  const texture = useTexture("/images/carpet.jpg");
+
+  return (
+    <>
+      <TransformControls
+        mode="translate"
+        object={_carpetTexture}
+        onObjectChange={(e) => {
+          console.log(e?.target.object);
+        }}
+      />
+      <group
+        ref={_carpetTexture}
+        position={props.position}
+        rotation={props.rotation}
+        scale={props.scale}
+      >
+        <mesh>
+          <planeGeometry args={[3.2, 1.9]} />
+          <meshBasicMaterial map={texture} />
         </mesh>
       </group>
     </>
@@ -74,7 +103,7 @@ const Camera = () => {
     if (window !== undefined) {
       setWidth(window.innerWidth);
     }
-  });
+  }, [width]);
 
   useThree(({ camera }) => {
     camera.rotation.set(-0.359, -0.571, -0.2);
@@ -82,8 +111,8 @@ const Camera = () => {
     // camera.zoom = width <= 1200 ? 1.2 : width <= 768 ? 1 : 1.75;
   });
   useFrame(({ camera }) => {
-    console.log("camera", camera.position);
-    console.log("rot", camera.rotation);
+    // console.log("camera", camera.position);
+    // console.log("rot", camera.rotation);
   });
   return null;
 };
@@ -149,7 +178,17 @@ function Header() {
           >
             <OrbitControls target={[-10, 0, -10]} makeDefault />
             <Camera />
-            <ScreenContent />
+            <ScreenContent
+              position={[-14.02, 2.56, 1.53]}
+              rotation={[-2.726, -1.177, -2.7424]}
+              scale={[0.55, 0.5, 1]}
+            />
+            <ScreenContent
+              position={[-13.86, 2.57, -1.93]}
+              rotation={[-1.61, -1.398, -1.612]}
+              scale={[0.56, 0.5, 1]}
+            />
+            {/* <CarpetTexture /> */}
             <Suspense fallback={null}>
               <Model />
               {/* <TV /> */}
