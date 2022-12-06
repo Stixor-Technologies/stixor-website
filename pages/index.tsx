@@ -34,7 +34,16 @@ export default function App() {
         overflowY: "auto",
       }}
     >
-      <Navbar />
+      <div
+        style={{
+          zIndex: "10",
+          pointerEvents: "all",
+          position: "relative",
+          top: "0",
+        }}
+      >
+        <Navbar />
+      </div>
       <Header />
       <Canvas
         camera={{

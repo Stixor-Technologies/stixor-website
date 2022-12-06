@@ -793,6 +793,9 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
           material={materials.Image}
           position={[-14.02, 2.44, 1.53]}
           rotation={[0, -0.01, 0]}
+          onClick={() => {
+            console.log("model clicked!");
+          }}
         />
         <mesh
           name="Music_Node"

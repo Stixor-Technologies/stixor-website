@@ -156,25 +156,21 @@ function Header() {
   return (
     <div className={styles.header}>
       <div className={styles.header_content}>
-        <div className={styles.header_left}>
-          <h1>
-            Stixor
-            <br /> Technologies
-          </h1>
-          <p>
-            We come up with creative solutions using <br />
-            the latest technology
-          </p>
-          <button className={styles.btn}>Explore</button>
-        </div>
         <div className={styles.header_right}>
           <Canvas
             camera={{
               near: 0.1,
               far: 10000,
-              zoom: 1.7,
+              zoom: 2,
             }}
-            // style={{ pointerEvents: "none" }}
+            // id="header_canvas"
+            style={{
+              pointerEvents: "all",
+              position: "absolute",
+              top: "-150px",
+              left: "0",
+              cursor: "pointer",
+            }}
           >
             <OrbitControls target={[-10, 0, -10]} makeDefault />
             <Camera />
@@ -202,6 +198,24 @@ function Header() {
               rotation={[0, 0, deg2rad(-89.3)]}
             /> */}
           </Canvas>
+        </div>
+        <div className={styles.header_left}>
+          <h1>
+            Stixor
+            <br /> Technologies
+          </h1>
+          <p>
+            We come up with creative solutions using <br />
+            the latest technology
+          </p>
+          <button
+            className={styles.btn}
+            onClick={() => {
+              console.log("button clicked!");
+            }}
+          >
+            Explore
+          </button>
         </div>
       </div>
     </div>
