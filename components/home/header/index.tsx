@@ -153,6 +153,13 @@ interface actions {
 }
 
 function Header() {
+  const [width, setWidth] = useState<any>();
+
+  useEffect(() => {
+    if (window !== undefined) {
+      setWidth(window.innerWidth);
+    }
+  }, [width]);
   return (
     <div className={styles.header}>
       <div className={styles.header_content}>
@@ -167,7 +174,7 @@ function Header() {
             style={{
               pointerEvents: "all",
               position: "absolute",
-              top: "-150px",
+              top: width > 992 ? "-150px" : "0px",
               left: "0",
               cursor: "pointer",
             }}
