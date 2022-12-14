@@ -2,6 +2,7 @@ import React, { Suspense, useState, useEffect, useRef } from "react";
 import type { NextPage } from "next";
 import styles from "./header.module.css";
 import { Model } from "./headerModel";
+import { CharacterModel } from "./character/CharactersModel";
 
 import {
   Canvas,
@@ -11,6 +12,7 @@ import {
   useThree,
 } from "@react-three/fiber";
 import {
+  Loader,
   OrbitControls,
   PresentationControls,
   TransformControls,
@@ -109,7 +111,12 @@ const Camera = () => {
   useThree(({ camera }) => {
     camera.rotation.set(-0.359, -0.571, -0.2);
     camera.position.set(-23.625, 7.45, 9.85);
-    // camera.zoom = width <= 1200 ? 1.2 : width <= 768 ? 1 : 1.75;
+    camera = new THREE.PerspectiveCamera(
+      60,
+      window.innerWidth / window.innerHeight,
+      100,
+      35000
+    );
   });
   useFrame(({ camera }) => {
     // console.log("camera", camera.position);
@@ -120,17 +127,17 @@ const Camera = () => {
 
 const Lights = () => {
   const light = useRef(null);
-  useHelper(light, PointLightHelper, 1, "red");
+  // useHelper(light, PointLightHelper, 1, "red");
 
   return (
     <>
-      <TransformControls
+      {/* <TransformControls
         object={light}
         mode="translate"
         onObjectChange={(e) => {
           console.log(e?.target.worldPosition);
         }}
-      />
+      /> */}
       <ambientLight intensity={10} color={0x404040} />
       <pointLight ref={light} position={[-12.5, 5, 2.7]} />
     </>
@@ -189,8 +196,11 @@ function Header() {
               rotation={[-1.61, -1.398, -1.612]}
               scale={[0.56, 0.5, 1]}
             />
+
             {/* <CarpetTexture /> */}
+
             <Suspense fallback={null}>
+              <CharacterModel />
               <Model />
               {/* <TV /> */}
               {/* <Office /> */}

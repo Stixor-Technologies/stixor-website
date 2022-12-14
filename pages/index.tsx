@@ -3,7 +3,8 @@ import { createRoot } from "react-dom/client";
 import React, { useRef, useState } from "react";
 import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
 import Navbar from "../components/navbar";
-import Header from "../components/home/header";
+import Header from "../components/home/headerTextured";
+import Services from "../components/home/servicesTextured";
 
 function CubeBox(props: ThreeElements["mesh"]) {
   const mesh = useRef<THREE.Mesh>(null!);
@@ -36,7 +37,7 @@ export default function App() {
     >
       <Navbar />
       <Header />
-      <Canvas
+      {/* <Canvas
         camera={{
           near: 0.1,
           far: 1000,
@@ -46,12 +47,14 @@ export default function App() {
         <ambientLight intensity={0.5} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
         <pointLight position={[-10, -10, -10]} />
-        {/* <Stats />
-        <OrbitControls /> */}
-
+        <Stats />
+        <OrbitControls /> 
+         
         <CubeBox position={[-1.2, 0, 0]} />
         <CubeBox position={[1.2, 0, 0]} />
-      </Canvas>
+      </Canvas> */}
+
+      <Services />
     </div>
   );
 }
