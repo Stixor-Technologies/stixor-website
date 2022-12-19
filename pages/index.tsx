@@ -5,6 +5,7 @@ import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
 import Navbar from "../components/navbar";
 import Header from "../components/home/headerTextured";
 import Services from "../components/home/servicesTextured";
+import Portfolio from "../components/home/portfolioCarousel";
 
 function CubeBox(props: ThreeElements["mesh"]) {
   const mesh = useRef<THREE.Mesh>(null!);
@@ -55,6 +56,7 @@ export default function App() {
       </Canvas> */}
 
       <Services />
+      <Portfolio />
     </div>
   );
 }

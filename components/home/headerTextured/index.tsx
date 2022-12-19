@@ -184,7 +184,7 @@ function Header() {
             }}
             // style={{ pointerEvents: "none" }}
           >
-            <OrbitControls target={[-10, 0, -10]} makeDefault />
+            {/* <OrbitControls target={[-10, 0, -10]} makeDefault /> */}
             <Camera />
             <ScreenContent
               position={[-14.02, 2.56, 1.53]}

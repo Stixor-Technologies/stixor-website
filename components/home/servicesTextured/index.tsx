@@ -80,7 +80,7 @@ function Services() {
         camera={{ position: [0, 0, 5], fov: 50 }}
         className={styles.canvas}
       >
-        <OrbitControls target={[0, 0, 0]} makeDefault />
+        {/* <OrbitControls target={[0, 0, 0]} makeDefault /> */}
 
         {/* <Camera /> */}
         <Lights />

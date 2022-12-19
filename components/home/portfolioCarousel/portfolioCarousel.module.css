@@ -1,0 +1,169 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: rgb(102, 35, 211);
+}
+.section_heading {
+  width: 100%;
+  text-align: center;
+  font-size: 80px;
+  font-weight: bolder;
+  z-index: 1000;
+  transition: ease-out 300ms;
+  color: white;
+}
+.content_container {
+  width: 85%;
+  height: 80%;
+  position: relative;
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card_img {
+  width: 650px;
+  height: 350px;
+  object-fit: cover !important;
+  /* box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.732); */
+  border-radius: 15px !important;
+}
+
+.slide {
+  opacity: 1;
+  filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.7);
+  transition: ease-out 400ms;
+  z-index: 1 !important;
+  position: relative;
+  border-radius: 15px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide > p {
+  opacity: 0;
+  transition: ease-out 200ms;
+}
+.slide_active {
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(1.19);
+  transition: ease-out 400ms;
+  z-index: 10000 !important;
+  position: relative;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.732);
+  border-radius: 15px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide_active:hover {
+  transform: scale(1.22);
+  cursor: pointer;
+  transition: ease-out 200ms;
+}
+.slide_active:hover .project_title {
+  bottom: 30px;
+  transition: ease-out 300ms;
+}
+.slide_active:hover .project_description {
+  bottom: 50px;
+  transition: ease-out 300ms;
+}
+.slide_active:hover .overlay {
+  background-color: rgba(0, 0, 0, 0.587);
+  transition: ease-out 300ms;
+  opacity: 1;
+  backdrop-filter: blur(3px);
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.338);
+  transition: ease-out 200ms;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  border-radius: 15px !important;
+}
+.slide_active:hover .btn {
+  opacity: 1;
+  transition: ease-out 300ms;
+}
+.btn {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.195) !important;
+  backdrop-filter: blur(3px);
+  border-radius: 14px;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  transition: ease-out 300ms;
+  border-radius: 5px;
+  z-index: 10000;
+  border: 1px solid rgba(255, 255, 255, 0.195) !important;
+}
+.btn p {
+  color: white !important;
+  font-size: 11px !important;
+}
+.btn:hover {
+  border: 1px solid white !important;
+}
+.project_title {
+  position: absolute;
+  bottom: -120px;
+  width: 100%;
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+  z-index: 1000;
+  transition: ease-out 300ms;
+}
+.project_description {
+  position: absolute;
+  bottom: -100px;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  font-weight: lighter;
+  z-index: 1000;
+  transition: ease-out 300ms;
+}
+.card_img_blurred {
+  width: 650px;
+  height: 350px;
+  object-fit: cover !important;
+  border-radius: 15px !important;
+}
+.arrow_container {
+  width: 242%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+}
+.arrow_img {
+  width: 50px;
+}
