@@ -2,10 +2,16 @@
     height: 100vh;
     /* height: auto; */
     width: 100vw;
-    background: linear-gradient(#000000, #280266, #000000);
+    /* background: linear-gradient(#000000, #280266, #000000); */
+    background: linear-gradient(#7501CF, #01033D);
     padding-top:90px;
     position: relative;
     pointer-events: none;
+  }
+
+  .canvas{
+    width: 100vw;
+    position: absolute;
   }
 
   .styles{
@@ -14,3 +20,49 @@
     display: flex;
     /* justify-content: space-between; */
   }
+
+  .container{
+   height: 100vh;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+  }
+
+  .title{
+    position:  absolute;
+    left : 10%;
+    font-family: var(--azonix);
+    font-size: 32px;
+  }
+
+  .cavnas_section{
+
+    margin-top:90px;
+  }
+
+.content_section{
+  padding: 50px;
+}
+
+
+.stixor_logo{
+  width: 220px;
+  height: 230px;
+  margin: auto;
+  display: block;
+}
+
+
+.tagline{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  text-align: center;
+  margin-top: 50px;
+  font-family: var(--azonix);
+  font-size: 26px;
+}
+
+.about_services{
+  margin-top: 40px;
+  font-family: var(--poppins);
+  text-align: center;
+}

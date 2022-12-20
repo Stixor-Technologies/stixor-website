@@ -34,6 +34,8 @@ import { positions, style } from "@mui/system";
 import { ServicesNew } from "./ServicesNew";
 import { Model } from "./servicesModel";
 
+import stixorlogo from "../../../public/assets/homepage_assets/stixor_logo_color.png";
+
 // const Camera = () => {
 //   const [width, setWidth] = useState<any>();
 
@@ -76,18 +78,38 @@ const Lights = () => {
 function Services() {
   return (
     <div className={styles.wrapper}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 50 }}
-        className={styles.canvas}
-      >
-        {/* <OrbitControls target={[0, 0, 0]} makeDefault /> */}
+      <div className={styles.container}>
+        <h2 className={styles.title}>Core Services</h2>
+        <div className={styles.cavnas_section}>
+          <Canvas
+            camera={{ near: 0.1, far: 10000, zoom: 2.0 }}
+            className={styles.canvas}
+          >
+            <OrbitControls target={[0, 0, 0]} makeDefault />
 
-        {/* <Camera /> */}
-        <Lights />
-        <Suspense fallback={null}>
-          <ServicesNew />
-        </Suspense>
-      </Canvas>
+            {/* <Camera /> */}
+            <Lights />
+            <Suspense fallback={null}>
+              <Model />
+            </Suspense>
+          </Canvas>
+        </div>
+
+        <div className={styles.content_section}>
+          <img className={styles.stixor_logo} src={stixorlogo.src}></img>
+          <div className={styles.tagline}>
+            <div>Tech</div>
+            <div>Passion</div>
+            <div>Impact</div>
+          </div>
+          <div className={styles.about_section}>
+            <p className={styles.about_services}>
+              We work across multiple industries and can cater to almost every
+              need of our clients. Explore our core services and learn more.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

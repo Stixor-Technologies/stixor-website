@@ -1,9 +1,9 @@
 import React, { Suspense, useState, useEffect, useRef } from "react";
 import type { NextPage } from "next";
 import styles from "./header.module.css";
-import { Model } from "./headerModel";
+import { HeaderNewModel } from "./Header_newModel";
 import { CharacterModel } from "./character/CharactersModel";
-
+import vectorImage from "../../../public/assets/homepage_assets/header_bg_vector.png";
 import {
   Canvas,
   useFrame,
@@ -163,6 +163,10 @@ interface actions {
 function Header() {
   return (
     <div className={styles.header}>
+      <div className={styles.header_background}>
+        <img className={styles.vector_image} src={vectorImage.src}></img>
+      </div>
+
       <div className={styles.header_content}>
         <div className={styles.header_left}>
           <h1>
@@ -177,10 +181,11 @@ function Header() {
         </div>
         <div className={styles.header_right}>
           <Canvas
+            className={styles.canvas}
             camera={{
               near: 0.1,
               far: 10000,
-              zoom: 1.7,
+              zoom: 1.6,
             }}
             // style={{ pointerEvents: "none" }}
           >
@@ -201,7 +206,7 @@ function Header() {
 
             <Suspense fallback={null}>
               <CharacterModel />
-              <Model />
+              <HeaderNewModel />
               {/* <TV /> */}
               {/* <Office /> */}
               {/* <ModelComponent /> */}

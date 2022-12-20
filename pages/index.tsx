@@ -6,6 +6,7 @@ import Navbar from "../components/navbar";
 import Header from "../components/home/headerTextured";
 import Services from "../components/home/servicesTextured";
 import Portfolio from "../components/home/portfolioCarousel";
+import style from "../styles/Home.module.css";
 
 function CubeBox(props: ThreeElements["mesh"]) {
   const mesh = useRef<THREE.Mesh>(null!);
@@ -29,6 +30,7 @@ function CubeBox(props: ThreeElements["mesh"]) {
 export default function App() {
   return (
     <div
+      className={style.main_wrapper}
       style={{
         height: "100vh",
         width: "100vw",
@@ -37,6 +39,7 @@ export default function App() {
       }}
     >
       <Navbar />
+      <div className={style.header_background}></div>
       <Header />
       {/* <Canvas
         camera={{

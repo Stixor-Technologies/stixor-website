@@ -2,6 +2,10 @@
   padding: 0 2rem;
 }
 
+.main_wrapper{
+  background: linear-gradient( #9B00FF, #01033D);
+}
+
 .main {
   min-height: 100vh;
   padding: 4rem 0;

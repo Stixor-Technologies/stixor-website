@@ -48,6 +48,7 @@
   margin-top: -20vw;
   /* margin-right: -70vw; */
   /* margin-left: 40vw; */
+  z-index: +1000000 !important;
 }
 
 .btn {

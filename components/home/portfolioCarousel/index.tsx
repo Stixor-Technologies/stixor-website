@@ -31,7 +31,7 @@ function Portfolio() {
 
   return (
     <div className={classes.container}>
-      <h2 className={classes.section_heading}>Projects</h2>
+      <h2 className={classes.section_heading}>OUR WORK</h2>
 
       <div className={classes.content_container}>
         <Slider {...settings}>

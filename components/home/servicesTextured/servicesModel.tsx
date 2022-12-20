@@ -204,31 +204,30 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     const step = 0.05;
 
     // if zoom
-    if (zoomLaptop) {
-      // disable zoom on other objects
-      setZoomOculus(false);
-      setZoomPhone(false);
-      state.camera.lookAt(-0.28, 1.19, 0.14);
-      state.camera.position.lerp(vec.set(0.4, 1.9, 0.14), step);
-    } else if (zoomOculus) {
-      setZoomPhone(false);
-      setLaptopZoom(false);
-      state.camera.lookAt(0.2, 0.99, 0.95);
-      state.camera.position.lerp(vec.set(0.9, 1.4, 1.6), step);
-    } else if (zoomPhone) {
-      setZoomOculus(false);
-      setLaptopZoom(false);
-      state.camera.lookAt(0.02, 1.11, -0.98);
-      state.camera.position.lerp(vec.set(0.6, 1.3, -0.58), step);
-    } else if (zoomConsole) {
-      setZoomOculus(false);
-      setLaptopZoom(false);
-      state.camera.lookAt(-0.2, 0.96, -0.42);
-      state.camera.position.lerp(vec.set(0.2, 1.2, -0.22), step);
-    } else {
-      state.camera?.position.lerp(vec.set(5.99, 1.21, -0.008), 0.5);
-      state.camera.lookAt(3, 1, 0);
-    }
+    // if (zoomLaptop) {
+    //   setZoomOculus(false);
+    //   setZoomPhone(false);
+    //   state.camera.lookAt(-0.28, 1.19, 0.14);
+    //   state.camera.position.lerp(vec.set(0.4, 1.9, 0.14), step);
+    // } else if (zoomOculus) {
+    //   setZoomPhone(false);
+    //   setLaptopZoom(false);
+    //   state.camera.lookAt(0.2, 0.99, 0.95);
+    //   state.camera.position.lerp(vec.set(0.9, 1.4, 1.6), step);
+    // } else if (zoomPhone) {
+    //   setZoomOculus(false);
+    //   setLaptopZoom(false);
+    //   state.camera.lookAt(0.02, 1.11, -0.98);
+    //   state.camera.position.lerp(vec.set(0.6, 1.3, -0.58), step);
+    // } else if (zoomConsole) {
+    //   setZoomOculus(false);
+    //   setLaptopZoom(false);
+    //   state.camera.lookAt(-0.2, 0.96, -0.42);
+    //   state.camera.position.lerp(vec.set(0.2, 1.2, -0.22), step);
+    // } else {
+    //   state.camera?.position.lerp(vec.set(5.99, 1.21, -0.008), 0.5);
+    //   state.camera.lookAt(3, 1, 0);
+    // }
 
     state.camera.updateProjectionMatrix();
   });
@@ -243,9 +242,10 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
     }, [width]);
 
     useThree(({ camera }) => {
-      // camera.position.set(5.99, 1.21, -0.008);
+      camera.position.set(5.99, 1.9, 3.5);
 
-      camera.position.set(-23.625, 7.45, 9.85);
+      // camera.position.set(5.99, 1.21, -0.008);
+      // camera.position.set(-23.625, 7.45, 9.85);
     });
     useFrame(({ camera }) => {
       // console.log("camera", camera.position);
